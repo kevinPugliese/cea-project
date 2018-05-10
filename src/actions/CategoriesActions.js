@@ -9,13 +9,11 @@ export function fetchCategories() {
             .on('value', snapshot => {
                 let item = [];
                 snapshot.forEach(element => {
-                    item.key = element.key;
-                    item.name = element.val().name;
-
-                    elements.push(item);
+                    elements.push({
+                        id: element.key,
+                        name: element.val().name
+                    });
                 });
-                console.log(elements)
-                toastr.success('Sucesso', 'Operação Realizada com sucesso.')
                 dispatch({ type: FETCH_CATEGORIES, payload: elements });
             });
     }

@@ -4,6 +4,7 @@ import _ from 'lodash';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { reduxForm, Field, formValueSelector } from 'redux-form';
+import { Redirect } from 'react-router';
 
 import Input from '../common/Input';
 import { required } from '../../functions/Utils';
@@ -11,7 +12,11 @@ import { createProducts } from '../../actions/ProductsActions';
 
 class CategoriesNew extends Component {
     render() {
-        const { handleSubmit, createProducts } = this.props;
+        const { handleSubmit, createProducts, productSave } = this.props;
+
+        if (productSave) {
+            return <Redirect to='/admin/produtos'/>;
+        }
 
         return (
             <form role='form' onSubmit={handleSubmit(createProducts)}>
@@ -40,4 +45,9 @@ class CategoriesNew extends Component {
 }
 
 CategoriesNew = reduxForm({form: 'categoryForm'})(CategoriesNew);
-export default connect(null, { createProducts })(CategoriesNew);
+
+const mapStateToProps = state => ({
+    productSave: state.ProductsReducers.productSave
+});
+
+export default connect(mapStateToProps, { createProducts })(CategoriesNew);

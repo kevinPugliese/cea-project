@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Header from './common/Header';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 import { fetchCategories } from '../../actions/CategoriesActions'; 
 
 class Categories extends Component {
@@ -11,13 +12,16 @@ class Categories extends Component {
     }
 
     renderList() {
-        const { items } = this.props;
-        console.log(items)
-        return items.map(item => `<p>${item.name}</p>`);
+        return _.map(this.props.items, item => {
+            return (
+                <li key={item.id} className="list-items">  
+                    {item.name}
+                </li>
+            );
+        });
     }
     
     render() {
-        console.log(this.props.items)
         return (
             <div>
                 <Header />

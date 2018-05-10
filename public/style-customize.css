@@ -1,0 +1,10 @@
+.menu li {
+    display: inline-block;
+}
+.menu li a {
+    padding: 20px 30PX;
+    display: block;
+}
+.menu li a:hover {
+    background-color: green;
+}

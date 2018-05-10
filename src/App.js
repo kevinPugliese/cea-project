@@ -17,6 +17,7 @@ import Banners from './components/admin/Banners';
 import Categories from './components/admin/Catagories';
 import CategoriesNew from './components/admin/CategoriesNew';
 import Details from './components/Details';
+import ProductsPhotos from './components/admin/ProductsPhotos';
 
 export default class App extends Component {
 
@@ -38,6 +39,7 @@ export default class App extends Component {
           <div>
             <Switch>
               <Route path="/admin/login" component={Login} />
+              <Route path="/admin/produtos/fotos/:id" component={ProductsPhotos} />
               <Route path="/admin/produtos/novo" component={ProductsNew} />
               <Route path="/admin/produtos" component={Products} />
               <Route path="/admin/banners" component={Banners} />

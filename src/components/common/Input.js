@@ -1,13 +1,33 @@
-import React from 'react';
+import React, {Component} from 'react';
 
-export default props => (
-    <div>
-      <label>{props.label}</label>
+export default class extends Component {
+
+  renderInput(isFile, input, type) {
+    if (isFile) {
+      return <input {...input} type={type} multiple onChange={
+        ( e ) => {      
+          e.preventDefault();
+          const { fields } = this.props;
+          // convert files to an array
+          const files = [ ...e.target.files ];
+          fields.yourField.handleChange(files);
+        }}/>
+    }
+    return <input {...input} type={type} />
+  }
+
+  render() {
+    const { input, type, isFile, label, meta: { error, warning, touched } } = this.props;
+    return (
       <div>
-        <input {...props.input} type={props.type} />
-        {props.meta.touched &&
-          ((props.meta.error && <span>{props.meta.error}</span>) ||
-            (props.meta.warning && <span>{props.meta.warning}</span>))}
+      <label>{label}</label>
+      <div>
+        {this.renderInput(isFile, input, type)}
+        {touched &&
+          ((error && <span>{error}</span>) ||
+            (warning && <span>{warning}</span>))}
       </div>
     </div>
-)
+    )
+  }
+}

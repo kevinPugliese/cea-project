@@ -34,10 +34,7 @@ class Login extends Component {
 }
 
 Login = reduxForm({form: 'loginForm'})(Login);
-const selector = formValueSelector('loginForm');
 const mapStateToProps = state => ({
-    email: selector(state, 'email'),
-    password: selector(state, 'password'),
     isLogged: state.AuthenticationReducers.isLogged,
     errorLogin: state.AuthenticationReducers.errorLogin
 });
